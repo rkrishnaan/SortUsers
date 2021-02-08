@@ -38,6 +38,40 @@ class UsersService
     }
 
     function sortUsers(String $sortkey): String {
-        return json_encode($this->users, JSON_PRETTY_PRINT);
+        $sortedArray = $this->mergeSort($this->users, $sortkey);
+        return json_encode($sortedArray, JSON_PRETTY_PRINT);
+    }
+
+    function mergeSort($input_array, $sortKey): array{
+        if(count($input_array) == 1 ) return $input_array;
+        $mid = count($input_array) / 2;
+        $left = array_slice($input_array, 0, $mid);
+        $right = array_slice($input_array, $mid);
+        $left = $this->mergeSort($left, $sortKey);
+        $right = $this->mergeSort($right, $sortKey);
+        return $this->merge($left, $right, $sortKey);
+    }
+    function merge($left, $right, $sortKey): array{
+        $sortField = substr($sortKey, 0, strpos($sortKey, ':'));
+        $sortDirection = substr($sortKey, strpos($sortKey, ':')+1);
+        $res = array();
+        while (count($left) > 0 && count($right) > 0){
+            if($right[0]->$sortField > $left[0]->$sortField){
+                $res[] = $right[0];
+                $right = array_slice($right , 1);
+            }else{
+                $res[] = $left[0];
+                $left = array_slice($left, 1);
+            }
+        }
+        while (count($left) > 0){
+            $res[] = $left[0];
+            $left = array_slice($left, 1);
+        }
+        while (count($right) > 0){
+            $res[] = $right[0];
+            $right = array_slice($right, 1);
+        }
+        return $res;
     }
 }

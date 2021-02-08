@@ -7,10 +7,10 @@ use DateTime;
 class User implements \JsonSerializable
 {
 
-    protected String $firstName;
-    protected String $lastName;
-    protected DateTime $firstLoginDate;
-    protected DateTime $lastLoginDate;
+    public String $firstName;
+    public String $lastName;
+    public DateTime $firstLoginDate;
+    public DateTime $lastLoginDate;
 
 
     public function __construct(
