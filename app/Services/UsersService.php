@@ -7,7 +7,7 @@ use App\Models\User;
 use DateTime;
 
 
-class LoadUsersService
+class UsersService
 {
     protected array $users = [];
 
@@ -37,8 +37,7 @@ class LoadUsersService
         return $this->users;
     }
 
-    function sortUsers(): array {
-        echo json_encode($this->users, JSON_FORCE_OBJECT);
-        return $this->users;
+    function sortUsers(String $sortkey): String {
+        return json_encode($this->users, JSON_PRETTY_PRINT);
     }
 }

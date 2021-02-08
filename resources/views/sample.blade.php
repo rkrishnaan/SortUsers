@@ -12,6 +12,9 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <script>
+            $(document).ready(function() {
+                $('.loader').hide();
+            });
             $(document).on("click", ".btn", function(event) {
                 const url=window.location.href+'?sort='+event.target.id;
                 $.ajax({
@@ -22,17 +25,40 @@
                     },
                     dataType: 'text',
                     cache: false,
-                    success: function(dataResult) {
-                        console.log('print dataResult');
-                        console.log(dataResult);
+                    beforeSend: function() {
+                        $(".loader").show();
+                        $("table").hide();
+                    },
+                    success: function(data) {
+                        const users = JSON.parse(data);
+                        let tableBody = '';
+                        for(const user in users) {
+                            tableBody+="<tr>"
+                            tableBody+=`<td>${users[user].firstName}</td>`
+                            tableBody+=`<td>${users[user].lastName}</td>`
+                            tableBody+=`<td>${users[user].firstLoginDate}</td>`
+                            tableBody+=`<td>${users[user].lastLoginDate}</td>`
+                            tableBody+="</tr>"
+                        }
+                        $("tbody").html(tableBody);
+                    },
+                    complete: function() {
+                        $(".loader").hide();
+                        $("table").show();
                     }
                 })
-            })
+            });
         </script>
     </head>
     <body>
     <div class=container>
         <h1>Users</h1>
+        <div class="loader">
+            <div class="d-flex align-items-center">
+                <strong>Loading...</strong>
+                <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+            </div>
+        </div>
         <table
             cellspacing=0
             class="table table-bordered table-hover table-inverse table-striped"
