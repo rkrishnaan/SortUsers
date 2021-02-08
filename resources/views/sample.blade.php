@@ -78,10 +78,10 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr>
-                        <td>{{ $user->getFirstName() }}</td>
-                        <td>{{ $user->getLastName() }}</td>
-                        <td>{{ $user->getFirstLoginDate()->format('Y-m-d H:i:s') }}</td>
-                        <td>{{ $user->getLastLoginDate()->format('Y-m-d H:i:s') }}</td>
+                        <td>{{ $user->firstName }}</td>
+                        <td>{{ $user->lastName }}</td>
+                        <td>{{ $user->firstLoginDate->format('Y-m-d H:i:s') }}</td>
+                        <td>{{ $user->lastLoginDate->format('Y-m-d H:i:s') }}</td>
                     </tr>
                 @endforeach
             </tbody>

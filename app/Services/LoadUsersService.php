@@ -4,14 +4,14 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Services\Contracts\SortServiceInterface;
 use DateTime;
 
 
-class UsersService
+class LoadUsersService
 {
     protected array $users = [];
-    //private MergeSortService $sortService;
-    private QuickSortService $sortService;
+    private SortServiceInterface $sortService;
 
     public function __construct(QuickSortService $sortService) {
         $this->buildUsersArray(User::getAllUsers());

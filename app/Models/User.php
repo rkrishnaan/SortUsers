@@ -25,22 +25,6 @@ class User implements \JsonSerializable
         $this->lastLoginDate = $lastLoginDate;
     }
 
-    public function getFirstName(): String {
-        return $this->firstName;
-    }
-
-    public function getLastName(): String {
-        return $this->lastName;
-    }
-
-    public function getFirstLoginDate(): DateTime {
-        return $this->firstLoginDate;
-    }
-
-    public function getLastLoginDate(): DateTime {
-        return $this->lastLoginDate;
-    }
-
     /**
      * This method retrieves the all the Users
      *
@@ -81,10 +65,10 @@ class User implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'firstName' => $this->getFirstName(),
-            'lastName' => $this->getLastName(),
-            'firstLoginDate' => $this->getFirstLoginDate()->format('Y-m-d H:i:s'),
-            'lastLoginDate' => $this->getLastLoginDate()->format('Y-m-d H:i:s')
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'firstLoginDate' => $this->firstLoginDate->format('Y-m-d H:i:s'),
+            'lastLoginDate' => $this->lastLoginDate->format('Y-m-d H:i:s')
         ];
     }
 }

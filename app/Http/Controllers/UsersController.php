@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\UsersService;
+use App\Services\LoadUsersService;
 use App\Services\SortUsersService;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function index(Request $request, UsersService $loadAction) {
+    public function index(Request $request, LoadUsersService $loadAction) {
         $users = $loadAction->getUsers();
 
         $sortKey = $request->query('sort');
