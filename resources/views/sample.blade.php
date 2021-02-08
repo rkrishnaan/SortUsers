@@ -17,6 +17,7 @@
             });
             $(document).on("click", ".btn", function(event) {
                 const url=window.location.href+'?sort='+event.target.id;
+                const eventTarget = event.currentTarget;
                 $.ajax({
                     url: url,
                     type: "GET",
@@ -42,9 +43,10 @@
                         }
                         $("tbody").html(tableBody);
                     },
-                    complete: function() {
+                    complete: function(event) {
                         $(".loader").hide();
                         $("table").show();
+                        eventTarget.focus();
                     }
                 })
             });
