@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\MergeSortService;
+use App\Services\QuickSortService;
 use Illuminate\Support\ServiceProvider;
 
 class SortServiceProvider extends ServiceProvider
@@ -14,9 +14,7 @@ class SortServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Library\Services\Contracts\SortServiceInterface', function ($app) {
-            return new QuickSortService();
-        });
+        $this->app->bind('App\Contracts\SortServiceInterface', 'App\Services\QuickSortService');
     }
 
     /**

@@ -14,7 +14,9 @@
         <script>
             $(document).ready(function() {
                 $('.loader').hide();
+                $('table').show();
             });
+
             $(document).on("click", ".btn", function(event) {
                 const url=window.location.href+'?sort='+event.target.id;
                 const eventTarget = event.currentTarget;
@@ -43,6 +45,11 @@
                         }
                         $("tbody").html(tableBody);
                     },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        const alert = $(".alert");
+                        $(alert).find('strong').html(errorThrown.toString());
+                        $(alert).show();
+                    },
                     complete: function(event) {
                         $(".loader").hide();
                         $("table").show();
@@ -61,11 +68,18 @@
                 <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
             </div>
         </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+            <strong></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <table
             cellspacing=0
             class="table table-bordered table-hover table-inverse table-striped"
             id=example
             width=100%
+            style="display: none"
         >
             <thead>
             <tr>
