@@ -7,4 +7,4 @@ The application is developed based on the laravel blog project template and has 
 Chrome.
 ## Application in action
 
-
+![](Users.gif)
